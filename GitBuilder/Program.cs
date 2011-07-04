@@ -51,8 +51,8 @@ namespace GitBuilder
             {
                 Directory.CreateDirectory(tempDir);
             }
-            var repo =  GitSharp.Git.Clone(new GitSharp.Commands.CloneCommand() { GitDirectory = repoistory, Directory = tempDir });
-            GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents , "-f"} };
+            //var repo =  GitSharp.Git.Clone(new GitSharp.Commands.CloneCommand() { GitDirectory = repoistory, Directory = tempDir });
+            GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents , "-f"}, Repository = Git.Clone(repoistory, tempDir) };
             checkout.Execute();
             
            
