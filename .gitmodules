@@ -1,3 +1,0 @@
-[submodule "GitSharp"]
-	path = GitSharp
-	url = git@github.com:tiernano/GitSharp.git
