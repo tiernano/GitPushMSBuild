@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using GitSharp;
-using LibGit2Sharp;
+
 
 namespace GitBuilder
 {
@@ -21,6 +21,11 @@ namespace GitBuilder
                  repoistory = args[1];
                 if (Directory.Exists(directory))
                 {
+                    foreach (string s in Directory.GetFiles(directory, "*.txt"))
+                    {
+                        processFile(s);
+                    }
+
                     using (FileSystemWatcher fw = new FileSystemWatcher(directory, "*.txt"))
                     {
                         fw.Created += new FileSystemEventHandler(fw_Created);
@@ -44,18 +49,21 @@ namespace GitBuilder
 
         static void fw_Created(object sender, FileSystemEventArgs e)
         {
-            Console.WriteLine("the file {0} was created", e.FullPath);
-            string contents = File.ReadAllText(e.FullPath);
+            processFile(e.FullPath);
+        }
+
+        private static void processFile(string p)
+        {
+            Console.WriteLine("the file {0} was created", p);
+            string contents = File.ReadAllText(p);
             string tempDir = Path.Combine(@"c:\temp", Guid.NewGuid().ToString());
             if (!Directory.Exists(tempDir))
             {
                 Directory.CreateDirectory(tempDir);
             }
             //var repo =  GitSharp.Git.Clone(new GitSharp.Commands.CloneCommand() { GitDirectory = repoistory, Directory = tempDir });
-            GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents , "-f"}, Repository = Git.Clone(repoistory, tempDir) };
+            GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents, "-f" }, Repository = Git.Clone(repoistory, tempDir) };
             checkout.Execute();
-            
-           
         }
 
     }
