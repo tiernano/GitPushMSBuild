@@ -67,7 +67,7 @@ namespace GitBuilder
             checkout.Execute();
             //todo: move the output directory to a new folder...
             //todo: If the config says this is a website (some time soon) create a Web Deployment Package. maybe add option to actually deploy to IIS?
-            //todo: Delete the build file, so as not to rebuild again, next time...
+            File.Delete(p);
         }
 
     }
