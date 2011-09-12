@@ -20,7 +20,7 @@ open(MYFILE, ">>builds/build-$revision.txt");
 
 print MYFILE $revision;
 print MYFILE "\n";
-print MYFILE "c:\\temp\\gitbuilddir";
+print MYFILE "c:/temp/gitbuilddir";
 close (MYFILE);
 print "\nWriting File\n";
 exit 0;
