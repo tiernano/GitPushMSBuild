@@ -61,9 +61,13 @@ namespace GitBuilder
             {
                 Directory.CreateDirectory(tempDir);
             }
+            //Todo: this is not fully working at the moment... Need to make some fixes...
             //var repo =  GitSharp.Git.Clone(new GitSharp.Commands.CloneCommand() { GitDirectory = repoistory, Directory = tempDir });
             GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents, "-f" }, Repository = Git.Clone(repoistory, tempDir) };
             checkout.Execute();
+            //todo: move the output directory to a new folder...
+            //todo: If the config says this is a website (some time soon) create a Web Deployment Package. maybe add option to actually deploy to IIS?
+            //todo: Delete the build file, so as not to rebuild again, next time...
         }
 
     }
