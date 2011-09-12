@@ -14,9 +14,7 @@ my $revision = trim(`git log --no-merges --format="%H" -1`);
 my $author = trim(`git log --no-merges --format="%aN" -1`);
 my $commitMessage = trim(`git log --format="%s" --no-merges -1`);
 
-GIT_WORK_TREE=/c/temp/gitbuilddir/
-
-git checkout -f
+(`GIT_WORK_TREE=/c/temp/gitbuilddir/;git checkout -fgit checkout -f`);
 
 open(MYFILE, ">>builds/build-$revision.txt");
 
