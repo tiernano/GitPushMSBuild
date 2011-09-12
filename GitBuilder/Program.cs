@@ -11,8 +11,8 @@ namespace GitBuilder
     class Program
     {
         static string directory;
-        static string repoistory; 
-
+        static string repoistory;
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
             if (args.Count() == 2)
@@ -23,6 +23,7 @@ namespace GitBuilder
                 {
                     foreach (string s in Directory.GetFiles(directory, "*.txt"))
                     {
+                        logger.Debug("Processing {0}", s);
                         processFile(s);
                     }
 
@@ -31,6 +32,7 @@ namespace GitBuilder
                         fw.Created += new FileSystemEventHandler(fw_Created);
                         fw.EnableRaisingEvents = true;
                         Console.WriteLine("Watching {0}", directory);
+                        logger.Debug("Wating {0} for new files", directory);
                         Console.WriteLine("hit enter to kill");
                         Console.ReadLine();
                     }
@@ -38,11 +40,12 @@ namespace GitBuilder
                 }
                 else
                 {
-                    Console.WriteLine("Directory does not exist... cant watch something that dont exist");
+                    logger.Error("Directory does not exist... cant watch something that dont exist");
                 }
             }
             else
             {
+                logger.Warn("Need param: Directory name to watch and Repo Location");
                 Console.WriteLine("Need param: Directory name to watch and Repo Location");
             }
         }
@@ -59,12 +62,13 @@ namespace GitBuilder
             string tempDir = Path.Combine(@"c:\temp", Guid.NewGuid().ToString());
             if (!Directory.Exists(tempDir))
             {
+                logger.Debug("Creating {0}", tempDir);
                 Directory.CreateDirectory(tempDir);
             }
             //Todo: this is not fully working at the moment... Need to make some fixes...
-            //var repo =  GitSharp.Git.Clone(new GitSharp.Commands.CloneCommand() { GitDirectory = repoistory, Directory = tempDir });
-            GitSharp.Commands.CheckoutCommand checkout = new GitSharp.Commands.CheckoutCommand() { Arguments = new List<string>() { contents, "-f" }, Repository = Git.Clone(repoistory, tempDir) };
-            checkout.Execute();
+            
+
+
             //todo: move the output directory to a new folder...
             //todo: If the config says this is a website (some time soon) create a Web Deployment Package. maybe add option to actually deploy to IIS?
             File.Delete(p);
