@@ -8,7 +8,7 @@ sub trim{
    $string =~ s/^\s+|\s+$//g;
    return $string;
 }
- 
+
 print "\nQueuing Build\n";
 my $revision = trim(`git log --no-merges --format="%H" -1`);
 my $author = trim(`git log --no-merges --format="%aN" -1`);
@@ -19,8 +19,8 @@ my $commitMessage = trim(`git log --format="%s" --no-merges -1`);
 open(MYFILE, ">>builds/build-$revision.txt");
 
 print MYFILE $revision;
-print MYFILE ":::";
-print MYFILE "/c/temp/gitbuilddir/";
+print MYFILE "\n";
+print MYFILE "c:\temp\gitbuilddir";
 close (MYFILE);
- 
+print "\nWriting File\n";
 exit 0;
