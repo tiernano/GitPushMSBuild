@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using GitSharp;
+using System.Linq;
+
 
 
 namespace GitBuilder
@@ -65,7 +63,6 @@ namespace GitBuilder
                 logger.Debug("Creating {0}", tempDir);
                 Directory.CreateDirectory(tempDir);
             }
-            //Todo: this is not fully working at the moment... Need to make some fixes...
             
 
 
