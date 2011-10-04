@@ -2,6 +2,7 @@ GIT and MSBuild, some what together, kind of....
 =================================================
 
 basic idea is as follows:
+
 * Create a new bare git repo (mkdir <ProjectName>; cd <ProjectName>; git init --bare)
 * In the ProjectName folder, create a folder called builds
 * Copy the files in the gitHookFiles into the hooks folder
@@ -12,5 +13,12 @@ basic idea is as follows:
 
 Todo
 -----
-Eventually add email support to tell you where your files can be picked up
-maybe setup building for web packages
+* Eventually add email support to tell you where your files can be picked up
+* maybe setup building for web packages
+* look into using Powershell instead of an EXE to do the work... this might allow for easier modification
+
+Links
+-----
+[StackOverFlow question on using PowerShell for Git Hooks][1]
+
+[1]:http://stackoverflow.com/questions/5629261/running-powershell-scripts-as-git-hooks/7645072#7645072
